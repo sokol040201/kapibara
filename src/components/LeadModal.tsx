@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { useCity } from "@/components/CityProvider";
 
@@ -51,19 +52,19 @@ export function LeadModal() {
   }
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 p-4 md:items-center">
+    <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 p-3 sm:p-4 md:items-center">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="lead-title"
-        className="max-h-[90vh] w-full max-w-[560px] overflow-y-auto rounded-4xl bg-white p-6 md:p-8"
+        className="max-h-[92vh] w-full max-w-[560px] overflow-y-auto rounded-3xl bg-white p-4 sm:rounded-4xl sm:p-6 md:p-8"
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start justify-between gap-3 sm:gap-4">
           <div>
-            <h2 id="lead-title" className="text-2xl font-medium md:text-[32px] md:leading-9">
+            <h2 id="lead-title" className="text-[24px] font-medium leading-7 sm:text-2xl md:text-[32px] md:leading-9">
               Оставить заявку
             </h2>
-            <p className="mt-2 text-text-secondary">
+            <p className="mt-2 text-sm text-text-secondary sm:text-base">
               Ответим с 09:00 до 22:00 · {city.name}. Сервера приёма нет — отправим вас в звонок или Telegram.
             </p>
           </div>
@@ -158,9 +159,9 @@ export function LeadModal() {
             />
             <span>
               Согласен на обработку персональных данных и принимаю{" "}
-              <a href="/politika" className="text-blue underline">
+              <Link href="/politika" className="text-blue underline">
                 политику конфиденциальности
-              </a>
+              </Link>
             </span>
           </label>
 

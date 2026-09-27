@@ -15,7 +15,7 @@ export function FaqList({ items }: { items: readonly Item[] | Item[] }) {
           <div key={item.q} className="overflow-hidden rounded-2xl bg-white">
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-xl font-medium"
+              className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-base font-medium sm:gap-4 sm:px-5 sm:py-4 sm:text-xl"
               onClick={() => setOpen(isOpen ? null : index)}
               aria-expanded={isOpen}
             >

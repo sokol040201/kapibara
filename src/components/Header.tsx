@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { NAV, SOCIAL, cities } from "@/lib/site";
 import { useCity } from "@/components/CityProvider";
 
@@ -24,6 +25,18 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
   const pathname = usePathname();
   const { city, cityId, setCityId, openLead } = useCity();
   const onHero = variant === "hero";
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   const socialHref = (item: (typeof SOCIAL)[number]) => {
     if ("href" in item) return item.href;
@@ -33,14 +46,19 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
     return city.telegram ?? "#";
   };
 
+  const linkIdle = onHero
+    ? "text-white/80 hover:bg-white/10 hover:text-white"
+    : "text-text-secondary hover:bg-canvas hover:text-black";
+  const linkActive = onHero ? "bg-white/15 text-white" : "bg-canvas text-black";
+
   return (
     <header
-      className={`z-40 flex min-h-16 w-full items-center justify-between gap-4 ${
+      className={`relative z-40 flex min-h-14 w-full items-center justify-between gap-2 sm:min-h-16 sm:gap-4 ${
         onHero ? "text-white" : "text-black"
       }`}
     >
-      <div className="flex min-w-0 items-center gap-3 md:gap-4">
-        <Link href="/" className="shrink-0 text-xl font-bold tracking-[-0.64px]">
+      <div className="flex min-w-0 items-center gap-2 md:gap-4">
+        <Link href="/" className="shrink-0 text-lg font-bold tracking-[-0.64px] sm:text-xl">
           Капибара
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
@@ -51,13 +69,7 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
                 key={item.href}
                 href={item.href}
                 className={`rounded-xl px-3 py-2 text-sm transition-all ${
-                  onHero
-                    ? active
-                      ? "bg-white/15 text-white"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
-                    : active
-                      ? "bg-canvas text-black"
-                      : "text-text-secondary hover:bg-canvas hover:text-black"
+                  active ? linkActive : linkIdle
                 }`}
               >
                 {item.label}
@@ -67,8 +79,8 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
         </nav>
       </div>
 
-      <div className="flex items-center gap-2 md:gap-3">
-        <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+        <div className="hidden items-center gap-1.5 md:flex">
           {SOCIAL.map((item) => (
             <a
               key={item.id}
@@ -95,7 +107,7 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
           id="city-select"
           value={cityId}
           onChange={(e) => setCityId(e.target.value as keyof typeof cities)}
-          className={`h-10 cursor-pointer rounded-full px-4 text-sm outline-none transition-all ${
+          className={`h-9 max-w-[132px] cursor-pointer truncate rounded-full px-3 text-sm outline-none transition-all sm:h-10 sm:max-w-none sm:px-4 ${
             onHero
               ? "border border-white bg-transparent text-white"
               : "bg-chip-dark text-white hover:bg-blue"
@@ -126,7 +138,86 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
         >
           Рассчитать
         </button>
+
+        <button
+          type="button"
+          className={`flex h-9 w-9 items-center justify-center rounded-full lg:hidden sm:h-10 sm:w-10 ${
+            onHero ? "border border-white/80 text-white" : "bg-canvas text-black"
+          }`}
+          aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          {menuOpen ? (
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+            </svg>
+          )}
+        </button>
       </div>
+
+      {menuOpen && (
+        <div
+          className={`absolute left-0 right-0 top-[calc(100%+8px)] z-50 rounded-3xl p-4 shadow-service-card lg:hidden ${
+            onHero ? "bg-white text-black" : "border border-border/40 bg-white"
+          }`}
+        >
+          <nav className="flex flex-col gap-1">
+            {NAV.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`rounded-2xl px-4 py-3 text-base font-medium transition-all ${
+                    active ? "bg-blue text-white" : "bg-canvas text-black hover:bg-blue-wash"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mt-3 flex gap-2">
+            {SOCIAL.map((item) => (
+              <a
+                key={item.id}
+                href={socialHref(item)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+                className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-canvas text-sm font-medium"
+              >
+                <SocialIcon id={item.id} />
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          <a
+            href={`tel:${city.phoneTel}`}
+            className="mt-3 flex h-12 items-center justify-center rounded-2xl bg-canvas text-base font-medium"
+          >
+            {city.phone}
+          </a>
+
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen(false);
+              openLead("once");
+            }}
+            className="mt-3 flex h-12 w-full items-center justify-center rounded-2xl bg-blue text-base font-medium text-white"
+          >
+            Рассчитать
+          </button>
+        </div>
+      )}
     </header>
   );
 }

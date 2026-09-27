@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { LeadForm } from "@/components/LeadForm";
@@ -17,19 +18,19 @@ export default function ReviewsPage() {
         <Header />
       </div>
 
-      <header className="relative mt-6 flex w-full max-w-[1392px] flex-col rounded-3xl bg-white px-4 py-8 md:mt-10 md:flex-row md:items-center md:px-11 md:py-11">
+      <header className="relative mt-4 flex w-full max-w-[1392px] flex-col rounded-3xl bg-white px-4 py-6 sm:mt-6 sm:py-8 md:mt-10 md:flex-row md:items-center md:px-11 md:py-11">
         <div className="md:max-w-[720px]">
           <p className="text-sm font-medium text-blue">Доверие</p>
-          <h1 className="mt-2 text-[32px] font-medium leading-none md:text-[60px] md:leading-[66px]">
+          <h1 className="mt-2 text-[28px] font-medium leading-8 sm:text-[32px] sm:leading-none md:text-[60px] md:leading-[66px]">
             Нам доверяют чистоту мебели
           </h1>
-          <p className="mt-4 text-text-secondary md:text-xl">
+          <p className="mt-4 text-sm text-text-secondary sm:text-base md:text-xl">
             Отзывы смотрите на независимой площадке 2ГИС. Здесь не выдумываем цитаты — только
             рейтинг, счётчик оценок и живой виджет.
           </p>
         </div>
         <Image
-          src="/mascot/portrait.png"
+          src={asset("/mascot/portrait.png")}
           alt="Маскот Капибара"
           width={320}
           height={320}
@@ -45,7 +46,7 @@ export default function ReviewsPage() {
       <section className="section-content mt-4 grid w-full gap-4 px-4 pb-8 md:mt-6 md:grid-cols-2 md:px-8">
         <div className="rounded-3xl bg-white p-6 md:p-10">
           <Image
-            src="/media/extractor.png"
+            src={asset("/media/extractor.png")}
             alt="Оборудование"
             width={280}
             height={280}

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { BEFORE_AFTER } from "@/lib/site";
+import { Icon } from "@/components/Icon";
+import { asset } from "@/lib/asset";
 
 export function BeforeAfterCarousel() {
   const [index, setIndex] = useState(0);
@@ -10,14 +12,14 @@ export function BeforeAfterCarousel() {
   const hasPhotos = Boolean(item.before && item.after);
 
   return (
-    <div className="rounded-4xl bg-canvas p-4 md:p-8">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+    <div className="rounded-3xl bg-canvas p-4 sm:rounded-4xl sm:p-5 md:p-8">
+      <div className="mb-5 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-medium text-blue">Результат</p>
-          <h2 className="mt-2 text-2xl font-medium md:text-[40px] md:leading-[44px] lg:text-[52px]">
+          <h2 className="mt-2 text-[26px] font-medium leading-8 sm:text-2xl md:text-[40px] md:leading-[44px] lg:text-[52px]">
             До и после
           </h2>
-          <p className="mt-3 max-w-[560px] text-text-secondary">
+          <p className="mt-3 max-w-[560px] text-sm text-text-secondary sm:text-base">
             Реальные фото с выездов. Результат зависит от ткани и возраста пятна — до старта
             скажем честно, чего ждать.
           </p>
@@ -28,17 +30,17 @@ export function BeforeAfterCarousel() {
               type="button"
               aria-label="Назад"
               onClick={() => setIndex((i) => (i - 1 + BEFORE_AFTER.length) % BEFORE_AFTER.length)}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-xl transition-all hover:bg-blue hover:text-white"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black transition-all hover:bg-blue hover:text-white"
             >
-              ←
+              <Icon name="chevronLeft" className="h-5 w-5" />
             </button>
             <button
               type="button"
               aria-label="Вперёд"
               onClick={() => setIndex((i) => (i + 1) % BEFORE_AFTER.length)}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-xl transition-all hover:bg-blue hover:text-white"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black transition-all hover:bg-blue hover:text-white"
             >
-              →
+              <Icon name="chevronRight" className="h-5 w-5" />
             </button>
           </div>
         )}
@@ -57,7 +59,7 @@ export function BeforeAfterCarousel() {
               </span>
               {src ? (
                 <Image
-                  src={src}
+                  src={asset(src)}
                   alt={`${item.title} — ${label.toLowerCase()}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

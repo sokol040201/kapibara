@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -23,29 +24,29 @@ export default function OncePage() {
         <Header />
       </div>
 
-      <header className="relative mt-6 flex w-full max-w-[1392px] flex-col rounded-3xl bg-white px-4 py-8 md:mt-10 md:min-h-[480px] md:flex-row md:items-center md:px-11 md:py-11 min-[1440px]:px-14">
+      <header className="relative mt-4 flex w-full max-w-[1392px] flex-col rounded-3xl bg-white px-4 py-6 sm:mt-6 sm:py-8 md:mt-10 md:min-h-[480px] md:flex-row md:items-center md:px-11 md:py-11 min-[1440px]:px-14">
         <div className="z-10 flex w-full flex-col md:max-w-[680px]">
           <p className="text-sm font-medium text-blue">Первичная чистка</p>
-          <h1 className="mt-2 text-[32px] font-medium leading-none md:text-[60px] md:leading-[66px]">
+          <h1 className="mt-2 text-[28px] font-medium leading-8 sm:text-[32px] sm:leading-none md:text-[60px] md:leading-[66px]">
             Разовая химчистка
           </h1>
-          <p className="mt-4 text-text-secondary md:text-xl">
+          <p className="mt-4 text-sm text-text-secondary sm:text-base md:text-xl">
             Один выезд — обновить мебель за раз, в том числе при сильных загрязнениях. Без
             предоплаты: оплата после приёмки результата. Работаем профессиональным комплектом
             Santoemma Sabrina, турбосушкой и польской химией.
           </p>
-          <div className="mt-8 flex w-full flex-col gap-3 md:flex-row md:gap-4">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:gap-4">
             <LeadButton scenario="once">Заказать онлайн</LeadButton>
             <Link
               href="/abonement"
-              className="flex h-16 w-full max-w-64 items-center justify-center rounded-2xl bg-canvas text-lg font-medium transition-all hover:bg-gray-hover"
+              className="flex h-14 w-full items-center justify-center rounded-2xl bg-canvas px-6 text-base font-medium transition-all hover:bg-gray-hover sm:h-16 sm:max-w-64 sm:px-8 sm:text-lg"
             >
               Смотреть абонемент
             </Link>
           </div>
         </div>
         <Image
-          src="/media/sofa.png"
+          src={asset("/media/sofa.png")}
           alt="Диван после чистки"
           width={480}
           height={480}

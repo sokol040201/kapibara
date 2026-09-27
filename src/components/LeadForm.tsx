@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { useCity } from "@/components/CityProvider";
 
@@ -62,9 +63,9 @@ export function LeadForm({
   }
 
   return (
-    <div className={`flex h-full flex-col rounded-3xl bg-white ${compact ? "p-5" : "p-6 md:p-8"}`}>
-      <h3 className="text-2xl font-medium md:text-[32px] md:leading-9">{title}</h3>
-      <p className="mt-2 text-text-secondary">{subtitle}</p>
+    <div className={`flex h-full flex-col rounded-3xl bg-white ${compact ? "p-4 sm:p-5" : "p-4 sm:p-6 md:p-8"}`}>
+      <h3 className="text-[24px] font-medium leading-7 sm:text-2xl md:text-[32px] md:leading-9">{title}</h3>
+      <p className="mt-2 text-sm text-text-secondary sm:text-base">{subtitle}</p>
 
       <form className="mt-6 flex flex-1 flex-col gap-4" onSubmit={onSubmit}>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -149,9 +150,9 @@ export function LeadForm({
           />
           <span>
             Согласен на обработку данных и{" "}
-            <a href="/politika" className="text-blue underline">
+            <Link href="/politika" className="text-blue underline">
               политику конфиденциальности
-            </a>
+            </Link>
           </span>
         </label>
 

@@ -33,7 +33,7 @@ export function LeadButton({
     <button
       type={type}
       onClick={() => openLead(scenario)}
-      className={`flex h-16 w-full max-w-64 items-center justify-center rounded-2xl px-8 text-lg font-medium transition-all ${styles[variant]} ${className}`}
+      className={`flex h-14 w-full max-w-none items-center justify-center rounded-2xl px-6 text-base font-medium transition-all sm:h-16 sm:max-w-64 sm:px-8 sm:text-lg ${styles[variant]} ${className}`}
     >
       {children}
     </button>

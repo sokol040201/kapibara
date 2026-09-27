@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 type Props = {
   src: string;
@@ -19,7 +20,7 @@ export function Mascot({
 }: Props) {
   return (
     <Image
-      src={src}
+      src={asset(src)}
       alt={alt}
       width={width}
       height={height}
