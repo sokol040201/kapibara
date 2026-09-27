@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+/public/media/_backup_cutouts/
 
 # debug
 npm-debug.log*
