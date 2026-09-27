@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blue: #145fff;
+  --color-blue-hover: #0041e1;
+  --color-blue-interactive: #027bfb;
+  --color-blue-wash: #ebf5ff;
+  --color-hero-from: #0077f5;
+  --color-hero-to: #009ff5;
+  --color-canvas: #f7f7f7;
+  --color-footer: #191919;
+  --color-chip-dark: #272727;
+  --color-text-secondary: #666666;
+  --color-text-muted: #717171;
+  --color-border: #c7c7c7;
+  --color-gray-hover: #aeaeae;
+  --font-sans: "Golos Text", "Golos", Arial, ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
+  --text-40px: 40px;
+  --text-40px--line-height: 44px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-black antialiased;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    letter-spacing: -0.32px;
+  }
+}
+
+@layer utilities {
+  .section-content {
+    width: 100%;
+    max-width: 1392px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-gradient {
+    background-image: linear-gradient(to bottom, #0077f5, #009ff5);
+  }
+
+  .shadow-service-card {
+    box-shadow:
+      0 0.37px 2.36px 0 #00000002,
+      0 1.63px 4.89px 0 #00000004,
+      0 4px 9.75px 0 #00000005,
+      0 7.7px 19.11px 0 #00000006,
+      0 12.96px 35.14px 0 #00000008,
+      0 20px 60px 0 #0000000a;
+  }
+}

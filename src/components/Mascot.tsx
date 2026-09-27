@@ -1,0 +1,30 @@
+import Image from "next/image";
+
+type Props = {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+  width?: number;
+  height?: number;
+};
+
+export function Mascot({
+  src,
+  alt,
+  className = "",
+  priority = false,
+  width = 480,
+  height = 480,
+}: Props) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      priority={priority}
+      className={`pointer-events-none select-none object-contain ${className}`}
+    />
+  );
+}
