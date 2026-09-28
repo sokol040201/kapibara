@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { NAV, SOCIAL, cities } from "@/lib/site";
+import { useEffect, useId, useRef, useState } from "react";
+import { NAV, SOCIAL, cities, type CityId } from "@/lib/site";
 import { useCity } from "@/components/CityProvider";
 
 function SocialIcon({ id }: { id: string }) {
@@ -18,6 +18,99 @@ function SocialIcon({ id }: { id: string }) {
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
       <path d="M12 2.1A9.9 9.9 0 0 0 2.1 12c0 1.7.4 3.4 1.3 4.9L2 22l5.2-1.4A9.9 9.9 0 1 0 12 2.1Zm5.7 14.1c-.2.7-1.3 1.2-2.1 1.4-.5.1-1.2.2-3.5-.7-2.9-1.2-4.8-4.2-4.9-4.4-.2-.2-1.3-1.7-1.3-3.3 0-1.5.8-2.3 1.1-2.6.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.8 2c.1.3.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.9-1.2c.2-.2.4-.2.6-.1l2.1 1c.2.1.4.2.5.3.1.2.1.8-.1 1.5Z" />
     </svg>
+  );
+}
+
+function CitySelect({
+  onHero,
+  cityId,
+  cityName,
+  onChange,
+}: {
+  onHero: boolean;
+  cityId: CityId;
+  cityName: string;
+  onChange: (id: CityId) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const listId = useId();
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointer = (e: MouseEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        id="city-select"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={listId}
+        onClick={() => setOpen((v) => !v)}
+        className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-sm outline-none transition-all sm:h-10 sm:px-4 ${
+          onHero
+            ? "border border-white bg-transparent text-white hover:bg-white/10"
+            : "bg-chip-dark text-white hover:bg-blue"
+        }`}
+      >
+        <span className="max-w-[7.5rem] truncate sm:max-w-none">{cityName}</span>
+        <svg
+          viewBox="0 0 24 24"
+          className={`h-4 w-4 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden
+        >
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {open && (
+        <ul
+          id={listId}
+          role="listbox"
+          aria-labelledby="city-select"
+          className="absolute left-0 top-[calc(100%+6px)] z-50 min-w-full overflow-hidden rounded-2xl border border-border/30 bg-white p-1 shadow-service-card"
+        >
+          {Object.values(cities).map((c) => {
+            const selected = c.id === cityId;
+            return (
+              <li key={c.id} role="option" aria-selected={selected}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onChange(c.id);
+                    setOpen(false);
+                  }}
+                  className={`flex w-full items-center rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
+                    selected
+                      ? "bg-blue text-white"
+                      : "text-black hover:bg-canvas"
+                  }`}
+                >
+                  {c.name}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
 }
 
@@ -100,25 +193,12 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
           ))}
         </div>
 
-        <label className="sr-only" htmlFor="city-select">
-          Город
-        </label>
-        <select
-          id="city-select"
-          value={cityId}
-          onChange={(e) => setCityId(e.target.value as keyof typeof cities)}
-          className={`h-9 max-w-[132px] cursor-pointer truncate rounded-full px-3 text-sm outline-none transition-all sm:h-10 sm:max-w-none sm:px-4 ${
-            onHero
-              ? "border border-white bg-transparent text-white"
-              : "bg-chip-dark text-white hover:bg-blue"
-          }`}
-        >
-          {Object.values(cities).map((c) => (
-            <option key={c.id} value={c.id} className="text-black">
-              {c.name}
-            </option>
-          ))}
-        </select>
+        <CitySelect
+          onHero={onHero}
+          cityId={cityId}
+          cityName={city.name}
+          onChange={setCityId}
+        />
 
         <a
           href={`tel:${city.phoneTel}`}
