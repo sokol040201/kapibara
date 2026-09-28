@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Mascot } from "@/components/Mascot";
 import { LeadButton } from "@/components/LeadButton";
 import { LeadForm } from "@/components/LeadForm";
 import { FaqList } from "@/components/FaqList";
@@ -61,7 +60,7 @@ export default function HomePage() {
             <Header variant="hero" />
 
             <div className="relative z-10 mt-6 flex flex-col gap-6 min-[768px]:mt-10 min-[768px]:gap-8 min-[1025px]:mt-14 min-[1025px]:gap-14">
-              <div className="grid items-center gap-5 lg:grid-cols-[1fr_auto] lg:gap-8">
+              <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(240px,42%)] lg:gap-6 xl:gap-10">
                 <div className="flex max-w-[740px] flex-col gap-4 min-[768px]:gap-6 min-[1025px]:gap-8">
                   <h1 className="text-[28px] font-bold leading-[32px] tracking-[-1.12px] text-white min-[768px]:text-[48px] min-[768px]:leading-[48px] min-[768px]:tracking-[-1.92px] min-[1025px]:text-[72px] min-[1025px]:leading-[68px] min-[1025px]:tracking-[-2.88px]">
                     Выездная химчистка мебели
@@ -81,14 +80,16 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <Mascot
-                  src="/mascot/hero.png"
-                  alt="Маскот Капибара с оборудованием"
-                  className="mx-auto h-auto w-[200px] min-[390px]:w-[240px] md:w-[340px] lg:w-[400px]"
-                  priority
-                  width={640}
-                  height={640}
-                />
+                <div className="relative mx-auto w-full max-w-[320px] min-[390px]:max-w-[360px] md:max-w-[420px] lg:mx-0 lg:max-w-none">
+                  <Image
+                    src={asset("/media/master-hero.webp")}
+                    alt="Мастер Капибара с профессиональным оборудованием"
+                    width={1200}
+                    height={1607}
+                    priority
+                    className="h-auto w-full select-none object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-1.5 min-[768px]:gap-2 min-[1025px]:grid-cols-3 min-[1025px]:gap-5">
