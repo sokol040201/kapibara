@@ -11,6 +11,7 @@ import { GisReviews } from "@/components/GisReviews";
 import { Icon } from "@/components/Icon";
 import { asset } from "@/lib/asset";
 import { FAQ, UTP } from "@/lib/site";
+import { ModuleScheme } from "@/components/ModuleScheme";
 
 const tiles = [
   {
@@ -54,12 +55,11 @@ const tiles = [
 export default function HomePage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
-      <section className="w-full bg-white p-1">
-        <div className="hero-gradient relative overflow-hidden rounded-[20px] px-3 pb-4 min-[390px]:rounded-[28px] min-[390px]:px-4 min-[390px]:pb-5 min-[768px]:rounded-[32px] min-[768px]:px-8 min-[768px]:pb-8 min-[1025px]:px-11 min-[1025px]:pb-[68px] xl:px-14">
-          <div className="relative mx-auto w-full max-w-[1168px] py-4 min-[768px]:py-10">
-            <Header variant="hero" />
-
-            <div className="relative z-10 mt-6 flex flex-col gap-6 min-[768px]:mt-10 min-[768px]:gap-8 min-[1025px]:mt-14 min-[1025px]:gap-14">
+      <Header variant="hero" />
+      <section className="w-full bg-white px-1 pb-1">
+        <div className="hero-gradient relative -mt-14 rounded-[20px] px-3 pb-4 pt-14 min-[390px]:rounded-[28px] min-[390px]:px-4 min-[390px]:pb-5 sm:-mt-16 sm:pt-16 min-[768px]:rounded-[32px] min-[768px]:px-8 min-[768px]:pb-8 min-[1025px]:px-11 min-[1025px]:pb-[68px] xl:px-14">
+          <div className="relative mx-auto w-full max-w-[1168px] pb-4 min-[768px]:pb-10">
+            <div className="relative z-10 flex flex-col gap-6 min-[768px]:gap-8 min-[1025px]:gap-14">
               <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(240px,42%)] lg:gap-6 xl:gap-10">
                 <div className="flex max-w-[740px] flex-col gap-4 min-[768px]:gap-6 min-[1025px]:gap-8">
                   <h1 className="text-[28px] font-bold leading-[32px] tracking-[-1.12px] text-white min-[768px]:text-[48px] min-[768px]:leading-[48px] min-[768px]:tracking-[-1.92px] min-[1025px]:text-[72px] min-[1025px]:leading-[68px] min-[1025px]:tracking-[-2.88px]">
@@ -80,12 +80,12 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative mx-auto w-full max-w-[320px] min-[390px]:max-w-[360px] md:max-w-[420px] lg:mx-0 lg:max-w-none">
+                <div className="relative mx-auto w-full max-w-[240px] min-[390px]:max-w-[280px] md:max-w-[320px] lg:mx-0 lg:max-w-[360px]">
                   <Image
-                    src={asset("/media/master-hero.webp")}
-                    alt="Мастер Капибара с профессиональным оборудованием"
-                    width={1200}
-                    height={1607}
+                    src={asset("/media/master-hero.png")}
+                    alt="Мастер Капибара"
+                    width={395}
+                    height={539}
                     priority
                     className="h-auto w-full select-none object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
                   />
@@ -183,40 +183,14 @@ export default function HomePage() {
 
       <section className="w-full bg-white px-1 pt-12 sm:pt-16 lg:pt-32">
         <div className="section-content px-3 sm:px-4 md:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-canvas px-4 py-8 sm:rounded-4xl sm:px-5 sm:py-10 md:min-h-[440px] md:px-11 md:py-16 lg:min-h-[480px]">
-            <div className="relative z-10 max-w-[560px] md:max-w-[50%]">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue">
-                <Icon name="module" />
-              </div>
-              <h2 className="text-[26px] font-medium leading-8 sm:text-2xl md:text-[40px] md:leading-[44px] lg:text-[52px]">
-                Что такое модуль
-              </h2>
-              <p className="mt-3 text-sm text-text-secondary sm:mt-4 sm:text-base md:text-lg">
-                1 модуль — участок до 60 см. Чистим полными секциями: сиденье, спинка или подлокотник
-                целиком, чтобы не было ореолов.
-              </p>
-              <ul className="mt-5 grid gap-2 sm:mt-6 sm:grid-cols-2 sm:gap-3">
-                {[
-                  "Секция ~1,2 м ≈ 2 модуля",
-                  "Секция ~0,8 м ≈ 1,5 модуля",
-                  "+2 модуля — запах",
-                  "+1 модуль — сложные пятна",
-                ].map((t) => (
-                  <li key={t} className="rounded-xl bg-white px-3 py-3 text-sm font-medium sm:px-4 sm:text-base">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative -mx-4 mt-5 h-[168px] w-[calc(100%+2rem)] sm:-mx-5 sm:mt-6 sm:h-[200px] sm:w-[calc(100%+2.5rem)] md:absolute md:inset-y-0 md:right-0 md:mx-0 md:mt-0 md:h-auto md:w-[58%]">
-              <Image
-                src={asset("/media/sofa-left.png")}
-                alt="Диван — левая секция"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain object-[right_bottom]"
-              />
-            </div>
+          <ModuleScheme />
+          <div className="mt-4 flex justify-center">
+            <Link
+              href="/abonement"
+              className="inline-flex h-12 items-center justify-center rounded-2xl bg-blue px-6 text-base font-medium text-white transition-all hover:bg-blue-hover"
+            >
+              Подробнее про абонемент
+            </Link>
           </div>
         </div>
       </section>
@@ -259,9 +233,9 @@ export default function HomePage() {
               ["shield", "Оплата по результату", "Сначала работа, потом приёмка и оплата."],
               ["spark", "Сильные загрязнения", "Берёмся за пятна, запах и въевшуюся грязь."],
               ["sofa", "Без ореолов", "Чистим секцию целиком, а не кусочком."],
-              ["machine", "Проф. оборудование", "Экстрактор, турбосушка и польская химия."],
+              ["machine", "Гипоаллергенно", "Безопасная химия и аккуратная работа с тканью."],
               ["camera", "Расчёт по фото", "1–2 снимка — и понятная смета."],
-              ["star", "Отзывы на 2ГИС", "Независимые оценки клиентов."],
+              ["star", "Честный результат", "Если не устроит — разберёмся и доведём до идеала."],
             ].map(([icon, title, text]) => (
               <div key={title} className="rounded-2xl bg-canvas p-5 sm:rounded-3xl sm:p-6 md:p-7">
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-blue sm:mb-5 sm:h-16 sm:w-16 md:h-[72px] md:w-[72px]">

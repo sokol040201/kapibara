@@ -20,9 +20,7 @@ export const metadata: Metadata = {
 export default function OncePage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-canvas">
-      <div className="section-content w-full px-4 pt-4 md:px-8">
-        <Header />
-      </div>
+      <Header />
 
       <header className="relative mt-4 flex w-full max-w-[1392px] flex-col rounded-3xl bg-white px-4 py-6 sm:mt-6 sm:py-8 md:mt-10 md:min-h-[480px] md:flex-row md:items-center md:px-11 md:py-11 min-[1440px]:px-14">
         <div className="z-10 flex w-full flex-col md:max-w-[680px]">

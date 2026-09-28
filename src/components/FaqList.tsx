@@ -20,9 +20,31 @@ export function FaqList({ items }: { items: readonly Item[] | Item[] }) {
               aria-expanded={isOpen}
             >
               <span>{item.q}</span>
-              <span className="text-text-muted">{isOpen ? "−" : "+"}</span>
+              <span
+                className={`relative flex h-5 w-5 shrink-0 items-center justify-center text-text-muted transition-transform duration-300 ease-out motion-reduce:transition-none ${
+                  isOpen ? "rotate-45" : "rotate-0"
+                }`}
+                aria-hidden
+              >
+                <span className="absolute h-[1.5px] w-3.5 rounded-full bg-current" />
+                <span className="absolute h-3.5 w-[1.5px] rounded-full bg-current" />
+              </span>
             </button>
-            {isOpen && <p className="px-5 pb-5 text-text-secondary">{item.a}</p>}
+            <div
+              className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <p
+                  className={`px-4 pb-4 text-sm leading-6 text-text-secondary transition-opacity duration-300 ease-out sm:px-5 sm:pb-5 sm:text-base motion-reduce:transition-none ${
+                    isOpen ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {item.a}
+                </p>
+              </div>
+            </div>
           </div>
         );
       })}

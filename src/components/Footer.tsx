@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LEGAL, NAV, cities } from "@/lib/site";
+import { asset } from "@/lib/asset";
 
 export function Footer() {
   return (
@@ -7,7 +9,16 @@ export function Footer() {
       <div className="flex w-full justify-center rounded-3xl bg-footer px-4 py-10 text-white sm:rounded-4xl sm:py-14 md:px-8">
         <div className="section-content grid gap-8 sm:gap-10 md:grid-cols-3">
           <div>
-            <p className="text-2xl font-medium md:text-3xl">Капибара</p>
+            <Link href="/" className="inline-flex items-center gap-3">
+              <Image
+                src={asset("/logo.png")}
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 object-contain"
+              />
+              <p className="text-2xl font-medium md:text-3xl">Капибара</p>
+            </Link>
             <p className="mt-3 max-w-sm text-sm text-white/80 sm:text-base">
               Выездная химчистка мебели. Сначала результат, потом оплата. Дальше — чистота по модулям.
             </p>
@@ -22,7 +33,7 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex flex-wrap gap-2">
               <a
                 href="https://t.me/kapibarapro"
                 target="_blank"
@@ -38,6 +49,22 @@ export function Footer() {
                 className="flex h-10 flex-1 items-center justify-center rounded-full bg-chip-dark px-4 text-sm transition-all hover:bg-blue sm:flex-none"
               >
                 WhatsApp
+              </a>
+              <a
+                href="https://max.ru/kapibarapro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 flex-1 items-center justify-center rounded-full bg-chip-dark px-4 text-sm transition-all hover:bg-blue sm:flex-none"
+              >
+                Max
+              </a>
+              <a
+                href="https://vk.com/kapibarapro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 flex-1 items-center justify-center rounded-full bg-chip-dark px-4 text-sm transition-all hover:bg-blue sm:flex-none"
+              >
+                ВКонтакте
               </a>
             </div>
           </div>

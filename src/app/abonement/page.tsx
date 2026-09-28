@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { LeadButton } from "@/components/LeadButton";
 import { LeadForm } from "@/components/LeadForm";
 import { ModuleCalculator } from "@/components/ModuleCalculator";
+import { ModuleScheme } from "@/components/ModuleScheme";
 import { EquipmentBlock } from "@/components/EquipmentBlock";
 import { Icon } from "@/components/Icon";
 import { ABONEMENT_STEPS } from "@/lib/site";
@@ -19,9 +20,7 @@ export const metadata: Metadata = {
 export default function AbonementPage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-canvas">
-      <div className="section-content w-full px-4 pt-4 md:px-8">
-        <Header />
-      </div>
+      <Header />
 
       <header className="relative mt-4 flex w-full max-w-[1392px] flex-col rounded-3xl bg-white px-4 py-6 sm:mt-6 sm:py-8 md:mt-10 md:flex-row md:items-center md:px-11 md:py-11">
         <div className="z-10 flex w-full flex-col md:max-w-[720px]">
@@ -77,9 +76,51 @@ export default function AbonementPage() {
       </section>
 
       <section className="section-content mt-4 w-full px-4 md:mt-6 md:px-8">
-        <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="mb-4 grid gap-3 md:grid-cols-2">
+          <div className="rounded-3xl bg-white p-5 md:p-7">
+            <p className="text-sm font-medium text-blue">Разовая чистка</p>
+            <h3 className="mt-2 text-xl font-medium">Когда «запущено»</h3>
+            <ul className="mt-4 space-y-2 text-sm text-text-secondary">
+              {[
+                "Грязь копится до полной чистки",
+                "Каждый вызов выходит дороже",
+                "Пятна успевают закрепиться",
+                "Снова искать мастера и время",
+              ].map((t) => (
+                <li key={t} className="flex gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-border" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-3xl bg-blue p-5 text-white md:p-7">
+            <p className="text-sm font-medium text-white/80">Абонемент «Модуль»</p>
+            <h3 className="mt-2 text-xl font-medium">Всегда свежая мебель</h3>
+            <ul className="mt-4 space-y-2 text-sm text-white/85">
+              {[
+                "Платите только за нужные зоны",
+                "Грязь и запах не накапливаются",
+                "Обивка служит дольше",
+                "Выезд обычно в течение 48 часов",
+              ].map((t) => (
+                <li key={t} className="flex gap-2">
+                  <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-white" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <ModuleScheme />
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-3xl bg-white px-4 py-8 md:p-11">
-            <h2 className="text-2xl font-medium md:text-[40px]">Как считаем модули</h2>
+            <h2 className="text-2xl font-medium md:text-[40px]">Ориентиры по модулям</h2>
+            <p className="mt-2 text-text-secondary">
+              Точное число скажем по фото. Ниже — типичные диапазоны.
+            </p>
             <div className="mt-6 overflow-x-auto">
               <table className="w-full min-w-[480px] text-left">
                 <thead>
@@ -117,17 +158,19 @@ export default function AbonementPage() {
               alt="Матрас"
               width={360}
               height={360}
-              className="mx-auto w-[220px] object-contain"
+              className="mx-auto w-[200px] object-contain md:w-[220px]"
             />
-            <ul className="mt-6 space-y-3">
+            <h3 className="mt-6 text-xl font-medium">Правила обслуживания</h3>
+            <ul className="mt-4 space-y-3">
               {[
-                "Секция чистится целиком",
-                "Кратность расчёта 0,5 модуля",
+                "Минимум выезда — от 5 модулей",
+                "До 5 выездов в месяц",
+                "Срок 6 / 9 / 12 месяцев",
                 "Онлайн-оплата / Яндекс Сплит",
-                "Выезд обычно в течение 48 часов",
+                "Остаток можно использовать ещё 36 дней после окончания",
               ].map((t) => (
-                <li key={t} className="flex gap-2">
-                  <Icon name="check" className="mt-0.5 h-5 w-5 text-blue" />
+                <li key={t} className="flex gap-2 text-sm sm:text-base">
+                  <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-blue" />
                   {t}
                 </li>
               ))}

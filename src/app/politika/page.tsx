@@ -12,9 +12,7 @@ export const metadata: Metadata = {
 export default function PolicyPage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-canvas">
-      <div className="section-content w-full px-4 pt-4 md:px-8">
-        <Header />
-      </div>
+      <Header />
 
       <article className="section-content mt-6 w-full max-w-[1392px] rounded-3xl bg-white px-4 py-8 md:mt-[40px] md:px-11 md:py-14">
         <h1 className="text-[32px] font-medium leading-none md:text-[56px] md:leading-[60px]">
