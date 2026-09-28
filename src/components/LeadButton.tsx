@@ -16,9 +16,9 @@ const styles = {
   secondary:
     "bg-canvas text-black hover:bg-gray-hover",
   white:
-    "bg-white text-black hover:bg-blue hover:text-white",
+    "bg-white text-black hover:bg-blue-wash",
   "outline-white":
-    "border border-white bg-transparent text-white hover:border-blue-interactive hover:bg-blue-interactive",
+    "border border-white bg-transparent text-white hover:bg-white hover:text-black",
 };
 
 export function LeadButton({

@@ -212,7 +212,7 @@ export function Header({ variant = "light" }: { variant?: "light" | "hero" }) {
           onClick={() => openLead("once")}
           className={`hidden h-10 items-center justify-center rounded-full px-6 text-base transition-all md:inline-flex ${
             onHero
-              ? "border border-white bg-transparent text-white hover:border-blue-interactive hover:bg-blue-interactive"
+              ? "border border-white bg-transparent text-white hover:bg-white hover:text-black"
               : "bg-blue text-white hover:bg-blue-hover"
           }`}
         >

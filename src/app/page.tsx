@@ -75,7 +75,7 @@ export default function HomePage() {
                     </LeadButton>
                     <Link
                       href="/abonement"
-                      className="flex h-14 w-full items-center justify-center rounded-2xl border border-white px-6 text-base font-medium text-white transition-all hover:border-blue-interactive hover:bg-blue-interactive sm:h-16 sm:max-w-64 sm:px-8 sm:text-lg"
+                      className="flex h-14 w-full items-center justify-center rounded-2xl border border-white px-6 text-base font-medium text-white transition-all hover:bg-white hover:text-black sm:h-16 sm:max-w-64 sm:px-8 sm:text-lg"
                     >
                       Абонемент «Модуль»
                     </Link>
